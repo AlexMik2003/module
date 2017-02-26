@@ -1,0 +1,19 @@
+{%  extends "page.twig" %}
+
+  {% block page %}
+      <div class="sidebar-module">
+          <h2>Categories: {{ cat }}</h2>
+          <ol class="list-unstyled">
+              {% for item in an %}
+                  <li>{{ item.date }}&emsp;&emsp;&emsp;<a href="{{ path_for('news',  { 'id': item.id }) }}" class="title">{{ item.title | capitalize}}</a></li>
+              {% endfor %}
+          </ol>
+      </div>
+      {% if pagination.needed %}
+          <div class="ui pagination menu">
+              {% for i in 1..pagination.lastpage %}
+                  <a class="{% if i == pagination.page %}active{% endif %} item" href="?page={{ i }}">{{ i }}</a>
+              {% endfor %}
+          </div>
+      {% endif %}
+  {% endblock %}

@@ -1,0 +1,26 @@
+<div class="container">
+    {% for item in comments %}
+        <p><b>{{ item.user }}</b></p>
+        <p style="margin-left: 20px;word-wrap:break-word;"">{{ item.text }}</p>
+                {% for answer in item.answer %}
+                <p style="margin-left: 50px;"><b>{{ answer.answer_user }}</b></p>
+                <p style="margin-left: 100px; word-wrap:break-word;">{{ answer.answer_text }}</p>
+                    {% endfor %}
+    {% if auth %}
+            <form class="form-horizontal" action="{{ path_for('comment.answer',{ 'id': item.id, 'news': item.news }) }}" method="post">
+                <div class="form-group">
+                    <label for="ans" class="col-md-3 control-label">Answer: </label>
+                    <div class="col-md-7">
+                        <textarea class="form-control" id="ans" name="ans" value=""></textarea>
+                    </div>
+                </div>
+                <div class="col-md-offset-5 col-md-10">
+                    <button type="submit" class="btn btn-primary"><strong>Add</strong></button>
+                </div>
+            {{ csrf.field | raw }}
+        </form>
+    {%  endif %}
+        <p><i><a href="{{ path_for('comment.plus',{ 'id': item.id, 'news': item.news }) }}">Plus:</a>{{ item.plus }}</i>&emsp;&emsp;&emsp;<i>
+                <a href="{{ path_for('comment.minus',{ 'id': item.id, 'news': item.news }) }}">Minus:</a></i>{{ item.minus }}</p><hr>
+    {%  endfor %}
+</div><br><br>

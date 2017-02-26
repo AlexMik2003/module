@@ -1,0 +1,30 @@
+{%  extends "page.twig" %}
+
+  {% block page %}
+      {% include "partial/slider.twig" %}
+      <div class="row">
+          <h3>Top 5 bloggers</h3>
+          {% for blogger in top_blogger %}
+              <p><a href="{{ path_for('user',  { 'id': blogger.id }) }}">{{ blogger.name }}</a></p>
+              {% endfor %}
+      </div>
+      <div class="row">
+          <h3>Top 3 news</h3>
+          {% for t_news in top_news %}
+              <p><a href="{{ path_for('news',  { 'id': t_news.id }) }}">{{ t_news.title }}</a></p>
+          {% endfor %}
+      </div>
+      <div class="sidebar-module">
+          <h2>Categories:</h2>
+          <ol class="list-unstyled">
+              {% for item in cat_news %}
+                  <li><a href="{{ path_for('category',  { 'id': item.cat_id }) }}">{{ item.cat_name | upper}}</a></li>
+                  {% for items in item.news %}
+                 <ol class="list-unstyled title_news">
+                     <li>{{ items.news_date }}&emsp;&emsp;&emsp;<a href="{{ path_for('news',  { 'id': items.news_id }) }}" class="title">{{ items.news_title }}</a></li>
+                  </ol>
+                  {% endfor %}
+              {% endfor %}
+          </ol>
+      </div>
+  {% endblock %}

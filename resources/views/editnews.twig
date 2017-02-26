@@ -1,0 +1,66 @@
+{%  extends "page.twig" %}
+
+  {% block page %}
+      <div class="row">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <b>Management</b>
+              </div>
+              <div class="panel-body">
+                  <form action="{{  path_for("admin.editnews") }}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                      <div class="form-group{{ errors.title ? ' has error' : '' }}">
+                          <label for="title" class="col-sm-2 control-label">Title: </label>
+                          <div class="col-sm-6">
+                              <input type="text" class="form-control" id="title" name="title" value="{{ edit_news.title }}" data-validate="required">
+                              {% if errors.title %}
+                                  <span class="help-block">{{ errors.title| first }}</span>
+                              {%  endif %}
+                          </div>
+                          <input type="hidden" class="form-control" id="news_id" name="news_id" value="{{ edit_news.news_id }}">
+                      </div>
+                      <div class="form-group">
+                          <label for="cat" class="col-sm-2 control-label">Category: </label>
+                          <div class="col-sm-6">
+                              <select id="cat" name="cat">
+                                  {% for item in edit_cat %}
+                                      {% if item.id == edit_news.cat_id %}
+                                      <option value="{{ item.id }}" selected>{{ item.name }}</option>
+                                      {% else %}
+                                      <option value="{{ item.id }}">{{ item.name }}</option>
+                                      {% endif %}
+                                  {% endfor %}
+                              </select>
+                          </div>
+                      </div>
+                      <div class="form-group{{ errors.text ? ' has error' : '' }}">
+                          <label for="text" class="col-sm-2 control-label">Text: </label>
+                          <div class="col-sm-6">
+                              <textarea id="text" name="text">{{ edit_news.text }}</textarea>
+                              {% if errors.text %}
+                                  <span class="help-block">{{ errors.text| first }}</span>
+                              {%  endif %}
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="analitics" class="col-sm-2 control-label">Analitics: </label>
+                          <div class="col-sm-6">
+                              {% if edit_news.analitics == 1 %}
+                              <input type="checkbox" id="analitics" name="analitics" value="1" checked>
+                                  {% else %}
+                                      <input type="checkbox" id="analitics" name="analitics" value="1">
+                              {% endif %}
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="img" class="col-sm-2 control-label">Image: </label>
+                          <div class="col-sm-6">
+                              <input type="file" class="file" id="img" name="img"  data-validate="required">
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary"><strong>Create</strong></button>
+                      {{ csrf.field | raw }}
+                  </form>
+              </div>
+          </div>
+      </div>
+  {% endblock %}

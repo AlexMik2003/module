@@ -1,0 +1,33 @@
+{%  extends "page.twig" %}
+
+  {% block page %}
+      <p>Сейчас читают эту новость - <span id="now"></span></p>
+      <p>Всего за период - <span id="all"></span></p>
+      <div class="container">
+          {% if news.analitics == 1 %}
+          <h2>{{ news.title }}<sup style="color:red">*</sup></h2>
+              {% else %}
+                  <h2>{{ news.title }}<span></span></h2>
+              {% endif %}
+          {% if user %}
+              {% if news.img =='' %}
+                  <p class="context">{{ news.context }}.</p>
+              {% else %}
+                  <p class="context"><img class="left" src="{{ news.img }}">{{ news.context }}.</p>
+              {% endif %}
+          {% else %}
+              {% if news.img =='' %}
+                  <p class="context">{{ news.context|slice(0,250) }}.</p>
+              {% else %}
+                  <p class="context"><img class="left" src="{{ news.img }}">{{ news.context|slice(0,250) }}.</p>
+              {% endif %}
+          {% endif %}
+      </div>
+      <p>
+          {% for item in news.tags %}
+              <a href="{{ path_for('tags',  { 'id': item.id }) }}">{{ item.name }}</a>
+              {% endfor %}
+      </p><hr>
+      {% include "partial/allcomments.twig" %}
+      {% include "partial/comments.twig" %}
+  {% endblock %}

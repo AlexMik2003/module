@@ -1,0 +1,17 @@
+{%  extends "page.twig" %}
+
+  {% block page %}
+      <div class="sidebar-module">
+        {% for item in comm %}
+            <p>{{ item.date }}</p>
+            <p style="margin-left:20px;">{{ item.text }}</p>
+            {%  endfor %}
+      </div>
+      {% if pagination.needed %}
+          <div class="ui pagination menu">
+              {% for i in 1..pagination.lastpage %}
+                  <a class="{% if i == pagination.page %}active{% endif %} item" href="?page={{ i }}">{{ i }}</a>
+              {% endfor %}
+          </div>
+      {% endif %}
+  {% endblock %}

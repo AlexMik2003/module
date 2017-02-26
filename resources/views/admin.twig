@@ -1,0 +1,33 @@
+{%  extends "page.twig" %}
+
+  {% block page %}
+      <div class="row">
+          <form action="{{  path_for("admin.action") }}" method="post" id="news_form">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <b>Management</b>
+                      <div class="nav user_action">
+                          <button type="submit" class="btn btn-default navbar-btn" name="action" value="add_cat">Add category</button>
+                          <button type="submit" class="btn btn-default navbar-btn" name="action" value="add_news">Add news</button>
+                          <button type="submit" class="btn btn-default navbar-btn" name="action" value="edit_news">Edit news</button>
+                          <button type="submit" class="btn btn-default navbar-btn" name="action" value="del_news">Delete news</button>
+                      </div>
+                  </div>
+                  <table class="table table-bordered dataTable display" id="news">
+                      <thead>
+                      <tr class="info">
+                          <th id="name">News title</th>
+                          <th id=date">Date</th>
+                          <th id="cat">Category</th>
+                          <th id="edit">Edit</th>
+                          <th id="check"><input type="checkbox" value="" name="check_all_news" id="check_all_news"></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+              </div>
+              {{ csrf.field | raw }}
+          </form>
+      </div>
+  {% endblock %}

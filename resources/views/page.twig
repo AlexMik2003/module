@@ -1,0 +1,53 @@
+{% extends "app.twig" %}
+    {% block content %}
+        <div class="left">
+            <div class="r1">
+                <h3>Led TV</h3>
+                <h2>Sony</h2>
+                <p>Only <span id="price">499</span>$</p>
+                <p class="skidka"></p>
+            </div>
+            <div class="r2">
+                <h3>Apple watch</h3>
+                <h2>Apple</h2>
+                <p>Only <span id="price2">799</span>$</p>
+                <p class="skidka2"></p>
+            </div>
+            <div class="r3">
+                <h3>Smartphone</h3>
+                <h2>Samsung</h2>
+                <p>Only <span id="price3">699</span>$</p>
+                <p class="skidka3"></p>
+            </div>
+            <div class="r4">
+                <h3>ThinkPad</h3>
+                <h2>Asus</h2>
+                <p>Only <span id="price4">1499</span>$</p>
+                <p class="skidka4"></p>
+            </div>
+        </div>
+            <div class="container">
+                {%  include "partial/header.twig" %}
+                <div class="blog-header">
+                    <h1 class="blog-title">Site News</h1>
+                </div>
+
+                <div class="row">
+                    <div id="modal_form">
+                        <span id="modal_close">X</span>
+                        <h3>Do you want to sign to our news?</h3>
+                        <label for="email">Email</label>
+                        <input type="email" id="email"><br><br>
+                        <label for="name">Name</label>
+                        <input type="text" id="name"><br><br>
+                        <input type="button" value="Sign">
+                    </div>
+                    <div id="overlay"></div>
+                    <div class="col-sm-8 blog-main">
+                        {% block page %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            {%  include "partial/footer.twig" %}
+    {% endblock %}

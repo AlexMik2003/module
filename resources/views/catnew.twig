@@ -1,0 +1,26 @@
+{%  extends "page.twig" %}
+
+  {% block page %}
+      <div class="row">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <b>New Category</b>
+              </div>
+              <div class="panel-body">
+                  <form action="{{  path_for("admin.catnew") }}" method="post" class="form-horizontal">
+                      <div class="form-group{{ errors.category ? ' has error' : '' }}">
+                          <label for="category" class="col-sm-2 control-label">Category: </label>
+                          <div class="col-sm-6">
+                              <input type="text" class="form-control" id="category" name="category" value="{{ old.category }}" data-validate="required">
+                              {% if errors.category %}
+                                  <span class="help-block">{{ errors.category| first }}</span>
+                              {%  endif %}
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary"><strong>Create</strong></button>
+                      {{ csrf.field | raw }}
+                  </form>
+              </div>
+          </div>
+      </div>
+  {% endblock %}

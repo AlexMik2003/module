@@ -1,0 +1,49 @@
+<div class="blog-masthead">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-left shapka">
+            <li class="dropdown">
+                <form action="{{ path_for("search") }}" method="post">
+                    <div class="ui-widget">
+                    <label for="search">Search: </label>
+                        <input id="search" name="search" autocomplete="on">
+                    </div>
+                    {{ csrf.field | raw }}
+                </form>
+            </li>
+            <li role="presentation">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Menu <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li><a href="{{ path_for("main") }}">Go home</a></li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="">About us</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">History</a></li>
+                            <li><a href="#">Our team</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Our missions</a></li>
+                    <li><a href="#">Contacts</a></li>
+                </ul>
+            </li>
+            {% if auth %}
+                <li role="presentation">
+                   <a href="{{ path_for("analitics") }}">Analitics</a>
+                </li>
+                {% if status == 1 %}
+                <li role="presentation">
+                    <a href="{{ path_for("admin") }}">Admin</a>
+                </li>
+                    {% endif %}
+                <li role="presentation">
+                    <a href="{{ path_for("signout") }}">Logout</a>
+                </li>
+            {% else %}
+            <li role="presentation">
+                <a href="{{ path_for("signin") }}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
